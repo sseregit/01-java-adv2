@@ -27,6 +27,6 @@ public class ReaderWriterMainV2 {
         }
         isr.close();
 
-        System.out.println("read String: " + content);
+        System.out.println("read String: = " + content);
     }
 }
