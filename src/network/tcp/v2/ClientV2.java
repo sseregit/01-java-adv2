@@ -1,13 +1,14 @@
-package network.tcp;
+package network.tcp.v2;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 import static util.MyLogger.log;
 
-public class ClientV1 {
+public class ClientV2 {
 
     private static final int PORT = 12345;
 
@@ -18,12 +19,24 @@ public class ClientV1 {
         DataInputStream input = new DataInputStream(socket.getInputStream());
         DataOutputStream output = new DataOutputStream(socket.getOutputStream());
         log("소켓 연결: " + socket);
-        String toSend = "Hello";
-        output.writeUTF(toSend);
-        log("client -> server: " + toSend);
 
-        String received = input.readUTF();
-        log("client <- server: " + received);
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("전송 문자: ");
+            String toSend = scanner.nextLine();
+
+            output.writeUTF(toSend);
+            log("client -> server: " + toSend);
+
+            if (toSend.equals("exit")) {
+                break;
+            }
+
+            String received = input.readUTF();
+            log("client <- server: " + received);
+        }
+
 
         log("연결 종료: " + socket);
         input.close();
