@@ -67,7 +67,6 @@ public class HttpRequestHandlerV4 implements Runnable {
 
     private void site2(HttpResponse response) {
         response.writeBody("<h1>site2</h1>");
-        response.flush();
     }
 
     private void search(HttpRequest request, HttpResponse response) {
